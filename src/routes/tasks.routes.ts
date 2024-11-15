@@ -1,16 +1,16 @@
 import { Router } from "express";
-import { getTasks, getTaskByID, createTask, updateTask, deleteTask } from "../controllers/tasks.controller";
+import { getTasks , getTaskByID, createTask, updateTask, deleteTask } from "../controllers/tasks.controller";
 
 const router = Router();
 
-router.get("/tasks", getTasks);
+router.get("/", getTasks );
 
-router.get("/tasks/:id", getTaskByID);
+router.get("/:id", getTaskByID);
 
-router.post("/tasks", createTask);
+router.post("/", createTask);
 
-router.put("/tasks/:id", updateTask);
+router.put("/:id", updateTask);
 
-router.delete("/tasks/:id", deleteTask);
+router.delete("/:id", deleteTask);
 
 export default router;
