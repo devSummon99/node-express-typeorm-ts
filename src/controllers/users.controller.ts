@@ -5,7 +5,8 @@ export const getUsers = (req: Request, res: Response) => {
 }
 
 export const getUserByID = (req: Request, res: Response) => {
-    res.json("Obteniendo la usuario buscada")
+    const { id } = req.params;
+    res.json(`Obteniendo la usuario buscada numero ${id}`)
 }
 
 export const createUser = (req: Request, res: Response) => {
@@ -13,10 +14,12 @@ export const createUser = (req: Request, res: Response) => {
 }
 
 export const updateUser = (req: Request, res: Response) => {
-    res.json("Actualizando usuario")
+    const { id } = req.params;
+    res.json(`Actualizando usuario numero ${id}`)
 }
 
 export const deleteUser = (req: Request, res: Response) => {
-    res.json("Eliminando usuario")
+    const { id } = req.params;
+    res.json(`Eliminando usuario numero ${id}`)
 }
 

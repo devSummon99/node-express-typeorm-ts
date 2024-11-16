@@ -5,7 +5,8 @@ export const getTasks = (req: Request, res: Response) => {
 }
 
 export const getTaskByID = (req: Request, res: Response) => {
-    res.json("Obteniendo la tarea buscada")
+    const { id } = req.params;
+    res.json(`Obteniendo la tarea buscada numero ${id}`)
 }
 
 export const createTask = (req: Request, res: Response) => {
@@ -13,10 +14,12 @@ export const createTask = (req: Request, res: Response) => {
 }
 
 export const updateTask = (req: Request, res: Response) => {
-    res.json("Actualizando tarea")
+    const { id } = req.params;
+    res.json(`Actualizando tarea numero ${id}`)
 }
 
 export const deleteTask = (req: Request, res: Response) => {
-    res.json("Eliminando tarea")
+    const { id } = req.params;
+    res.json(`Eliminando tarea numero ${id}`)
 }
 
