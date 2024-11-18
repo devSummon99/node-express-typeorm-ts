@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 
 export const getTasks = (req: Request, res: Response) => {
-    res.json("Obteniendo todas las tareas")
+    res.json("Obteniendo tareas")
 }
 
 export const getTaskByID = (req: Request, res: Response) => {
