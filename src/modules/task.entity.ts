@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { State } from "./enum"
 
 @Entity("task")
@@ -9,7 +9,7 @@ export class Task {
     @Column()
     title : String;
 
-    @Column()
+    @Column('text')
     description : String;
 
     @Column({
@@ -18,4 +18,12 @@ export class Task {
       })
       state : State;
     
+    @CreateDateColumn()
+    createdAt : Date;
+
+    @UpdateDateColumn()
+    updatedAt : Date;
+
+    @DeleteDateColumn()
+    deletedAt : Date;
 }
