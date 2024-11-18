@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { State } from "./enum"
+import { User } from "./";
 
 @Entity("task")
 export class Task {
@@ -26,4 +27,7 @@ export class Task {
 
     @DeleteDateColumn()
     deletedAt : Date;
-}
+  
+    @ManyToOne(() => User, (user) => user.tasks)
+    user: User;
+  }
