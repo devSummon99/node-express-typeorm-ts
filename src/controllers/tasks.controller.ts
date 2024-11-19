@@ -1,24 +1,29 @@
 import { Request, Response } from "express"
+import { Task } from "../modules";
 
-export const getTasks = (req: Request, res: Response) => {
-    res.json("Obteniendo tareas")
+export const getTasks = async (req: Request, res: Response) => {
+    try {
+    
+    } catch (error) {
+        
+    }
 }
 
-export const getTaskByID = (req: Request, res: Response) => {
+export const getTaskByID = async (req: Request, res: Response) => {
     const { id } = req.params;
     res.json(`Obteniendo la tarea buscada numero ${id}`)
 }
 
-export const createTask = (req: Request, res: Response) => {
+export const createTask =  async (req: Request, res: Response) => {
     res.json("Creando tarea")
 }
 
-export const updateTask = (req: Request, res: Response) => {
+export const updateTask = async (req: Request, res: Response) => {
     const { id } = req.params;
     res.json(`Actualizando tarea numero ${id}`)
 }
 
-export const deleteTask = (req: Request, res: Response) => {
+export const deleteTask = async (req: Request, res: Response) => {
     const { id } = req.params;
     res.json(`Eliminando tarea numero ${id}`)
 }

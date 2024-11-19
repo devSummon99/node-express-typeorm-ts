@@ -4,6 +4,7 @@ import { User } from "./";
 
 @Entity("task")
 export class Task {
+
     @PrimaryGeneratedColumn()
     id: number;
 
