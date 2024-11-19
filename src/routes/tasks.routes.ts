@@ -3,7 +3,7 @@ import { getTasks , getTaskByID, createTask, updateTask, deleteTask } from "../c
 
 export const taskRoutes = Router();
 
-taskRoutes.get("/", getTasks );
+taskRoutes.get("/", getTasks);
 
 taskRoutes.get("/:id", getTaskByID);
 
@@ -12,4 +12,5 @@ taskRoutes.post("/", createTask);
 taskRoutes.put("/:id", updateTask);
 
 taskRoutes.delete("/:id", deleteTask);
+
 

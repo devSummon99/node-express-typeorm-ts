@@ -1,34 +1,35 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { State } from "./enum"
 import { User } from "./";
 
 @Entity("task")
 export class Task {
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    title : String;
+  @Column()
+  title: String;
 
-    @Column('text')
-    description : String;
+  @Column('text')
+  description: String;
 
-    @Column({
-        type: 'enum',
-        enum: State,
-      })
-      state : State;
-    
-    @CreateDateColumn()
-    createdAt : Date;
+  @Column({
+    type: 'enum',
+    enum: State,
+  })
+  state: State;
 
-    @UpdateDateColumn()
-    updatedAt : Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @DeleteDateColumn()
-    deletedAt : Date;
-  
-    @ManyToOne(() => User, (user) => user.tasks)
-    user: User;
-  }
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn()
+  deletedAt: Date;
+
+  @ManyToOne(() => User, (user) => user.tasks)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+}

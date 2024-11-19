@@ -11,4 +11,7 @@ export const AppDataSource = new DataSource({
     synchronize: true,
     logging: true,
     entities: [Task, User],
+    cache:{
+        duration:30000
+    }
 })

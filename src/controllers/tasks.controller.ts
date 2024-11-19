@@ -1,20 +1,33 @@
 import { Request, Response } from "express"
-import { Task } from "../modules";
+import { taskRepository } from "../services/tasks.service";
 
 export const getTasks = async (req: Request, res: Response) => {
     try {
-    
-    } catch (error) {
-        
+        const tasks = await taskRepository.find();
+        if (tasks.length > 0)
+            res.status(200).json(tasks);
+        else { res.status(404).json({ msg: "Tasks no found" }); }
+    } catch (err) {
+        if (err instanceof Error)
+            res.status(501).json(err.message)
     }
 }
 
 export const getTaskByID = async (req: Request, res: Response) => {
     const { id } = req.params;
-    res.json(`Obteniendo la tarea buscada numero ${id}`)
+    try {
+        const taskID = parseInt(id)
+       const task = await taskRepository.findOneBy({id: taskID})
+       if (task) 
+        res.status(200).json(task)
+       else { res.status(404).json({ msg: "Task no found" }); }
+    } catch (err) {
+        if (err instanceof Error)
+            res.status(501).json(err.message)
+    }
 }
 
-export const createTask =  async (req: Request, res: Response) => {
+export const createTask = async (req: Request, res: Response) => {
     res.json("Creando tarea")
 }
 
