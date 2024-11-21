@@ -40,7 +40,7 @@ export const createTask = async (req: Request, res: Response) => {
             newTask.description = description;
             newTask.state = state;
             if (!user) { res.status(404).json({ msg: "User no found" }) }
-             else { newTask.user = user ;}
+            else { newTask.user = user; }
             taskRepository.save(newTask);
             res.status(201).json("Task created")
         }
@@ -56,9 +56,9 @@ export const updateTask = async (req: Request, res: Response) => {
         const taskID = parseInt(id)
         const task = await taskRepository.findOneBy({ id: taskID })
         if (task) {
-        const { title, description, state} = req.body;
-        await taskRepository.update({title, description, state}, task)
-        res.status(203).json("Task has been modified successfully ")
+            const { title, description, state } = req.body;
+            await taskRepository.update({ title, description, state }, task)
+            res.status(203).json("Task has been modified successfully ")
         }
         else {
             res.status(404).json({ msg: "Task no found" });
