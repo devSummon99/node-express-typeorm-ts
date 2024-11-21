@@ -57,7 +57,7 @@ export const updateTask = async (req: Request, res: Response) => {
         const task = await taskRepository.findOneBy({ id: taskID })
         if (task) {
             const { title, description, state } = req.body;
-            await taskRepository.update({ title, description, state }, task)
+            await taskRepository.update({id: taskID},{ title, description, state })
             res.status(203).json("Task has been modified successfully ")
         }
         else {
