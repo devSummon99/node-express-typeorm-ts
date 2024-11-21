@@ -52,8 +52,19 @@ export const createTask = async (req: Request, res: Response) => {
 
 export const updateTask = async (req: Request, res: Response) => {
     const { id } = req.params;
-    res.json(`Actualizando tarea numero ${id}`)
+    try {
+        const taskID = parseInt(id)
+        const task = await taskRepository.findOneBy({ id: taskID })
+        if (!task){ res.status(404).json({ msg: "Task no found" }); }
+        const { title, description, state} = req.body;
+        
+        res.status(203).json("Task has been modified successfully ")
+    } catch (err) {
+        if (err instanceof Error)
+            res.status(501).json(err.message)
+    }
 }
+
 
 export const deleteTask = async (req: Request, res: Response) => {
     const { id } = req.params;
