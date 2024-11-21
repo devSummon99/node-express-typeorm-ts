@@ -55,10 +55,14 @@ export const updateTask = async (req: Request, res: Response) => {
     try {
         const taskID = parseInt(id)
         const task = await taskRepository.findOneBy({ id: taskID })
-        if (!task){ res.status(404).json({ msg: "Task no found" }); }
+        if (task) {
         const { title, description, state} = req.body;
-        
+        await taskRepository.update({title, description, state}, task)
         res.status(203).json("Task has been modified successfully ")
+        }
+        else {
+            res.status(404).json({ msg: "Task no found" });
+        }
     } catch (err) {
         if (err instanceof Error)
             res.status(501).json(err.message)
