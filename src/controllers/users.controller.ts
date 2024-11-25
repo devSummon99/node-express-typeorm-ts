@@ -36,8 +36,20 @@ export const updateUser = (req: Request, res: Response) => {
     res.json(`Actualizando usuario numero ${id}`)
 }
 
-export const deleteUser = (req: Request, res: Response) => {
+export const deleteUser =  async (req: Request, res: Response) => {
     const { id } = req.params;
-    res.json(`Eliminando usuario numero ${id}`)
+    try {
+        const userID = parseInt(id);
+        const user = await userRepository.findOneBy({ id: userID });
+        if (user) {
+            await userRepository.delete({ id: userID });
+            res.status(203).json("User has been deleted");
+        } else {
+            res.status(404).json("User no found");
+        }
+    } catch (err) {
+        if (err instanceof Error)
+            res.status(501).json(err.message);
+    }
 }
 
