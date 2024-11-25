@@ -1,12 +1,30 @@
 import { Request, Response } from "express"
+import { userRepository } from "../services";
 
-export const getUsers = (req: Request, res: Response) => {
-    res.json("Obteniendo todas las usuarios")
+export const getUsers =  async (req: Request, res: Response) => {
+    try {
+        const users = await userRepository.find();
+        if (users.length > 0)
+            res.status(200).json(users);
+        else { res.status(404).json("Users no found"); }
+    } catch (err) {
+        if (err instanceof Error)
+            res.status(501).json(err.message);
+    }
 }
 
-export const getUserByID = (req: Request, res: Response) => {
+export const getUserByID = async (req: Request, res: Response) => {
     const { id } = req.params;
-    res.json(`Obteniendo la usuario buscada numero ${id}`)
+    try {
+        const userID = parseInt(id);
+        const user = await userRepository.findOneBy({ id: userID });
+        if (user)
+            res.status(200).json(user);
+        else { res.status(404).json("User no found"); }
+    } catch (err) {
+        if (err instanceof Error)
+            res.status(501).json(err.message);
+    }
 }
 
 export const createUser = (req: Request, res: Response) => {
