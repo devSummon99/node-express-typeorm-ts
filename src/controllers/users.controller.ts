@@ -1,7 +1,8 @@
 import { Request, Response } from "express"
 import { userRepository } from "../services";
+import { User } from "../modules";
 
-export const getUsers =  async (req: Request, res: Response) => {
+export const getUsers = async (req: Request, res: Response) => {
     try {
         const users = await userRepository.find();
         if (users.length > 0)
@@ -27,16 +28,45 @@ export const getUserByID = async (req: Request, res: Response) => {
     }
 }
 
-export const createUser = (req: Request, res: Response) => {
-    res.json("Creando usuario")
+export const createUser = async (req: Request, res: Response) => {
+    const { username, email, password } = req.body;
+    try {
+        const userFind = await userRepository.findOne({ where: { email: email } });
+        if (userFind) res.status(400).json("User has already been created");
+        else {
+            const newUser = new User;
+            newUser.username = username;
+            newUser.email = email;
+            newUser.password = password;
+            userRepository.save(newUser);
+            res.status(201).json("User created");
+        }
+    } catch (err) {
+        if (err instanceof Error)
+            res.status(501).json(err.message);
+    }
 }
 
-export const updateUser = (req: Request, res: Response) => {
+export const updateUser = async (req: Request, res: Response) => {
     const { id } = req.params;
-    res.json(`Actualizando usuario numero ${id}`)
+    try {
+        const userID = parseInt(id);
+        const user = await userRepository.findOneBy({ id: userID });
+        if (user) {
+            const { username, email, password } = req.body;
+            await userRepository.update({ id: userID }, { username, email, password });
+            res.status(203).json("User has been modified successfully ");
+        }
+        else {
+            res.status(404).json("User no found");
+        }
+    } catch (err) {
+        if (err instanceof Error)
+            res.status(501).json(err.message);
+    }
 }
 
-export const deleteUser =  async (req: Request, res: Response) => {
+export const deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
         const userID = parseInt(id);
