@@ -1,6 +1,10 @@
 import { Request, Response } from "express"
 import { userRepository } from "../services";
 import { User } from "../modules";
+import { hashSync, compareSync } from "bcryptjs";
+
+
+
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
@@ -37,7 +41,7 @@ export const createUser = async (req: Request, res: Response) => {
             const newUser = new User;
             newUser.username = username;
             newUser.email = email;
-            newUser.password = password;
+            newUser.password = hashSync(password,10);
             userRepository.save(newUser);
             res.status(201).json("User created");
         }
@@ -54,7 +58,7 @@ export const updateUser = async (req: Request, res: Response) => {
         const user = await userRepository.findOneBy({ id: userID });
         if (user) {
             const { username, email, password } = req.body;
-            await userRepository.update({ id: userID }, { username, email, password });
+            await userRepository.update({ id: userID }, { username, email, password: hashSync(password, 10) });
             res.status(203).json("User has been modified successfully ");
         }
         else {
