@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Task } from "./";
+import { Role } from "./enum";
 
 
 @Entity("user")
@@ -8,22 +9,29 @@ export class User {
     id: number;
 
     @Column()
-    username : String;
+    username: String;
 
     @Column()
-    email : String;
+    email: String;
 
     @Column()
-    password : String;
+    password: String;
+
+    @Column({
+        type: 'enum',
+        enum: Role,
+        default: "user"
+    })
+    role : Role;
 
     @CreateDateColumn()
-    createdAt : Date;
+    createdAt: Date;
 
     @UpdateDateColumn()
-    updatedAt : Date;
+    updatedAt: Date;
 
     @DeleteDateColumn()
-    deletedAt : Date;
+    deletedAt: Date;
 
     @OneToMany(() => Task, (task) => task.user)
     tasks: Task[]
