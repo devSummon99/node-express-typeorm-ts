@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 
-import { userRoutes, taskRoutes } from "./routes/";
+import { userRoutes, taskRoutes, authRoutes } from "./routes/";
 import app from "./app";
 import { db } from "./db";
 
@@ -17,5 +17,6 @@ app.get("/", (req, res) => {
 
 app.use("/tasks", taskRoutes);
 app.use("/users", userRoutes);
+app.use("/auth",authRoutes);
 
 db();
