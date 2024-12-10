@@ -33,7 +33,7 @@ export const getUserByID = async (req: Request, res: Response) => {
 }
 
 export const createUser = async (req: Request, res: Response) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, role } = req.body;
     try {
         const userFind = await userRepository.findOne({ where: { email: email } });
         if (userFind) res.status(400).json("User has already been created");
@@ -42,6 +42,7 @@ export const createUser = async (req: Request, res: Response) => {
             newUser.username = username;
             newUser.email = email;
             newUser.password = hashSync(password,10);
+            newUser.role = role;
             userRepository.save(newUser);
             res.status(201).json("User created");
         }
@@ -57,8 +58,8 @@ export const updateUser = async (req: Request, res: Response) => {
         const userID = parseInt(id);
         const user = await userRepository.findOneBy({ id: userID });
         if (user) {
-            const { username, email, password } = req.body;
-            await userRepository.update({ id: userID }, { username, email, password: hashSync(password, 10) });
+            const { username, email, password, role } = req.body;
+            await userRepository.update({ id: userID }, { username, email, password: hashSync(password, 10), role });
             res.status(203).json("User has been modified successfully ");
         }
         else {
