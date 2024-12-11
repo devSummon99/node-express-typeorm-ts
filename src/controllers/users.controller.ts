@@ -38,7 +38,7 @@ export const createUser = async (req: Request, res: Response) => {
         const userFind = await userRepository.findOne({ where: { email: email } });
         if (userFind) res.status(400).json("User has already been created");
         else {
-            const newUser = new User;
+            let newUser = new User;
             newUser.username = username;
             newUser.email = email;
             newUser.password = hashSync(password,10);
