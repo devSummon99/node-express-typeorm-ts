@@ -9,10 +9,10 @@ export class Task {
   id: number;
 
   @Column()
-  title: String;
+  title: string;
 
   @Column('text')
-  description: String;
+  description: string;
 
   @Column({
     type: 'enum',

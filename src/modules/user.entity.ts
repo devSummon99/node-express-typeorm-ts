@@ -9,13 +9,13 @@ export class User {
     id: number;
 
     @Column()
-    username: String;
+    username: string;
 
     @Column()
-    email: String;
+    email: string;
 
     @Column()
-    password: String;
+    password: string;
 
     @Column({
         type: 'enum',
