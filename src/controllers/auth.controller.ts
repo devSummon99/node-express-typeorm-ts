@@ -13,7 +13,7 @@ export const login = async (req: Request, res: Response) => {
         const userFind = await userRepository.findOne({ where: { email: email } });
         if (!userFind) res.status(400).json("User doesn't exists");
         else {
-           if (compareSync(password, userFind.password)) {
+           if (!compareSync(password, userFind.password)) {
             res.status(400).json("Password is wrong");
            } else {
             const token = jwt.sign({
