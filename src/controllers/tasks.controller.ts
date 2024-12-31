@@ -10,7 +10,7 @@ export const getTasks = async (req: Request, res: Response) => {
         else { res.status(404).json("Tasks no found"); }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
@@ -24,7 +24,7 @@ export const getTaskByID = async (req: Request, res: Response) => {
         else { res.status(404).json("Task no found"); }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
@@ -46,7 +46,7 @@ export const createTask = async (req: Request, res: Response) => {
         }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
@@ -65,7 +65,7 @@ export const updateTask = async (req: Request, res: Response) => {
         }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
@@ -83,7 +83,7 @@ export const deleteTask = async (req: Request, res: Response) => {
         }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 

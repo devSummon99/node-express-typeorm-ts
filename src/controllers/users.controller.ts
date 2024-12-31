@@ -14,7 +14,7 @@ export const getUsers = async (req: Request, res: Response) => {
         else { res.status(404).json("Users no found"); }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
@@ -28,7 +28,7 @@ export const getUserByID = async (req: Request, res: Response) => {
         else { res.status(404).json("User no found"); }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
@@ -48,7 +48,7 @@ export const createUser = async (req: Request, res: Response) => {
         }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
@@ -67,7 +67,7 @@ export const updateUser = async (req: Request, res: Response) => {
         }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
@@ -84,7 +84,7 @@ export const deleteUser = async (req: Request, res: Response) => {
         }
     } catch (err) {
         if (err instanceof Error)
-            res.status(501).json(err.message);
+            res.status(500).json(err.message);
     }
 }
 
