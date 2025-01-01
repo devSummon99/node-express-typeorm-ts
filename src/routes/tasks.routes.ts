@@ -12,6 +12,6 @@ taskRoutes.post("/",[verifyToken] , createTask);
 
 taskRoutes.put("/:id",[verifyToken] , updateTask);
 
-taskRoutes.delete("/:id",[verifyToken , isAdmin ], deleteTask);
+taskRoutes.delete("/:id",[verifyToken ], deleteTask);
 
 
