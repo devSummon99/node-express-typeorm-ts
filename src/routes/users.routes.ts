@@ -12,5 +12,5 @@ userRoutes.post("/", [verifyToken ], createUser);
 
 userRoutes.put("/:id",[verifyToken] , updateUser);
 
-userRoutes.delete("/:id", [verifyToken , isAdmin] ,deleteUser);
+userRoutes.delete("/:id", [verifyToken]  ,deleteUser);
 
