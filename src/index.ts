@@ -4,7 +4,6 @@ import cors from "cors";
 import { userRoutes, taskRoutes, authRoutes } from "./routes/";
 import app from "./app";
 import { db } from "./db";
-import { authMiddleware } from "./middleware";
 
 app.use(express.json());
 app.use(morgan("dev"));

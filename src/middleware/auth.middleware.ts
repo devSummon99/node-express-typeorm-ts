@@ -4,7 +4,7 @@ import { env } from "../env";
 import { userRepository } from "../services";
 import { payload } from "../interfaces/payload";
 
-export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const verifyToken = async (req: Request, res: Response, next: NextFunction) => {
 
     const token = req.headers.authorization;
 
@@ -21,3 +21,5 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         }
     }
 }
+
+export const isAdmin = async (req: Request, res: Response, next: NextFunction) => {}
